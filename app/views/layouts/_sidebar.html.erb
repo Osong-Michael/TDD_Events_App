@@ -1,11 +1,11 @@
-<aside style="background: #c5c9c9; width: 200px; float: right;">
+<aside id="sidebar">
   <nav>
-    <ul>
-      <li>
-        <%= link_to "All Events", events_path%> 
+    <ul>  
+      <li class="upcoming-events">
+        <%= link_to "All Events", events_path, class: 'button' %>
       </li>
-      <li>
-        <%= link_to "Add New Event", new_event_path %>
+      <li class="create-event">
+        <%= link_to 'Add New Event', new_event_path, class: 'button' %>
       </li>
     </ul>
   </nav>

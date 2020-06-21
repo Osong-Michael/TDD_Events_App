@@ -1,41 +1,39 @@
 <%= form_for(@event) do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name, autofocus: true %>
-  </p>
-
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description, cols: 30, rows: 7 %>
-  </p>
-
-  <p>
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-  </p>
-
-  <p>
-    <%= f.label :price %><br>
-    <%= f.number_field :price %>
-  </p>
-
-  <p>
-    <%= f.label :starts_at %><br>
-    <%= f.datetime_select :starts_at %>
-  </p>
-
-  <p>
-    <%= f.label :image_file_name %><br>
-    <%= f.text_field :image_file_name, size: 30, placeholder: 'GIF, JPG, or PNG filename' %>
-  </p>
-
-  <p>
-    <%= f.label :capacity %><br>
-    <%= f.number_field :capacity %>
-  </p>
-
-  <p>
-    <%= f.submit%> | <%= link_to "Cancel", root_path %>
-  </p>
-
+  <fieldset>
+    <ol>
+      <li class="required">
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: true %>
+      </li>
+      <li class="required">
+        <%= f.label :description %>
+        <%= f.text_area :description, cols: 40, rows: 7 %>
+      </li>
+      <li class="required">
+        <%= f.label :location %>
+        <%= f.text_field :location, size: 30 %>
+      </li>
+      <li class="required">
+        <%= f.label :price %>
+        <%= f.number_field :price, size: 6 %>
+      </li>
+      <li class="required">
+        <%= f.label :starts_at %>
+        <%= f.datetime_select :starts_at %>
+      </li>
+      <li class="required">
+        <%= f.label :capacity %>
+        <%= f.number_field :capacity, size: 6 %>
+      </li>
+      <li class="required">
+        <%= f.label :image_file_name, 'Image Filename' %>
+        <%= f.text_field :image_file_name, size: 30, 
+                         placeholder: "GIF, JPG, or PNG file name" %>
+      </li>
+    </ol>
+    <p>
+      <%= f.submit %>
+      <%= link_to "Cancel", events_path, class: 'button' %>
+    </p>
+  </fieldset>
 <% end %>
