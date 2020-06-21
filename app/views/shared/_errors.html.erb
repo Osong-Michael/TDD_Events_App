@@ -1,4 +1,4 @@
-<% if @event.errors.any? %>
+<% if object.errors.any? %>
   <section id="errors">
     <header>
       <h2>
@@ -6,11 +6,11 @@
       </h2>
       <h3>
         Please correct the following
-        <%= pluralize(@event.errors.size, "error") %>:
+        <%= pluralize(object.errors.size, "error") %>:
       </h3>
     </header>
     <ul>
-    <% @event.errors.full_messages.each do |message| %>
+    <% object.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
     </ul>

@@ -8,6 +8,9 @@ class Event < ApplicationRecord
     message: "must reference a GIF, JPG, or PNG image"
   }
   
+
+  has_many :registrations, dependent: :destroy
+
   def free?
     price.blank? || price.zero?    
   end
@@ -15,4 +18,14 @@ class Event < ApplicationRecord
   def self.upcoming
     where('starts_at >= ?', Time.now).order('starts_at')
   end
+
+  def spots_left
+    capacity - registrations.size
+  end
+
+  def sold_out?
+    spots_left.zero?    
+  end
+  
+  
 end

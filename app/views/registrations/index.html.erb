@@ -1,0 +1,11 @@
+<header id="content-header">
+  <h1>Registrations for <%= link_to(@event.name, @event) %></h1>
+</header>
+
+<ol>
+  <% @registrations.each do |r| %>
+    <li>
+      <%= mail_to(r.email, r.name) %> (<%= r.how_heard%>)
+    </li>
+  <% end %>
+</ol>
