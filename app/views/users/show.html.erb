@@ -5,10 +5,12 @@
   </header>
   <footer>
     <nav>
-      <%= link_to 'Edit Account', edit_user_path(@user), class: 'button' %>
-      <%= link_to 'Delete', @user, 
-                  class: 'button',
-                  method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% if current_user?(@user) %>
+        <%= link_to 'Edit Account', edit_user_path(@user), class: 'button' %>
+        <%= link_to 'Delete', @user, 
+                    class: 'button',
+                    method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
     </nav>
   </footer>
 </article>
