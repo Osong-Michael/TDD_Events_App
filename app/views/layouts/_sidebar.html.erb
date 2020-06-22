@@ -4,9 +4,11 @@
       <li class="upcoming-events">
         <%= link_to "All Events", events_path, class: 'button' %>
       </li>
+      <% if current_user_admin? %>
       <li class="create-event">
         <%= link_to 'Add New Event', new_event_path, class: 'button' %>
       </li>
+      <% end %>
     </ul>
   </nav>
 </aside>

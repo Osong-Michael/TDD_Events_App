@@ -8,6 +8,20 @@
   <p>
     <%= @event.description %>
   </p>
+
+  <p>
+    <%= pluralize(@likers.size, 'like') %>
+  </p>
+  <% if @likers.any? %>
+    <h3>Likers</h3>
+    <ul>
+      <% @likers.each do |user| %>
+        <li>
+          <%= link_to user.name, user %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
   
   <h3>Price</h3>
   <p>
@@ -28,12 +42,13 @@
   
   <footer>
     <%= register_link(@event) %>
-    <p>(<%= pluralize(@event.spots_left, 'spot') %> left)</p>
     <nav>
-      <%= link_to 'Edit', edit_event_path(@event), class: 'button' %>
-      <%= link_to 'Delete', @event, 
-                  class: 'button',
-                  method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% if current_user_admin? %>
+        <%= link_to 'Edit', edit_event_path(@event), class: 'button' %>
+        <%= link_to 'Delete', @event, 
+                    class: 'button',
+                    method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
     </nav>
   </footer>
 </article>

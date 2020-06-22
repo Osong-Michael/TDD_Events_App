@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_075802) do
+ActiveRecord::Schema.define(version: 2020_06_22_143823) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -24,13 +24,21 @@ ActiveRecord::Schema.define(version: 2020_06_22_075802) do
     t.integer "capacity", default: 1
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_likes_on_event_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "registrations", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
     t.string "how_heard"
     t.integer "event_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["event_id"], name: "index_registrations_on_event_id"
   end
 
@@ -40,7 +48,10 @@ ActiveRecord::Schema.define(version: 2020_06_22_075802) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin", default: false
   end
 
+  add_foreign_key "likes", "events"
+  add_foreign_key "likes", "users"
   add_foreign_key "registrations", "events"
 end
