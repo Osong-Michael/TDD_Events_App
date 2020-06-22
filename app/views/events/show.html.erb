@@ -12,6 +12,16 @@
   <p>
     <%= pluralize(@likers.size, 'like') %>
   </p>
+
+  <% if current_user %>
+    <% if @current_like %>
+      <%= button_to 'Unliike', event_like_path(@event, @current_like), method: :delete %>
+    <% else %>
+      <%= button_to 'Like', event_likes_path(@event) %>
+    <% end %>
+  <% end %>
+
+
   <% if @likers.any? %>
     <h3>Likers</h3>
     <ul>
