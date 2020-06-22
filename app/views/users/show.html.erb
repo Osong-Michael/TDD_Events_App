@@ -1,10 +1,16 @@
+<% content_for(:title, @user.name)  %>
+
 <article id="user">
   <header>
     <h1>Name: <%= @user.name %></h1>
     <h2>Email: <%= @user.email %></h2>
+    <hr>
   </header>
+
+<% content_for(:side) do %>
   <% if @liked_events.any? %>
     <h3>Liked Events</h3>
+    <hr>
     <ul>
       <% @liked_events.each do |event| %>
         <li>
@@ -13,6 +19,7 @@
       <% end %>
     </ul>
   <% end %>
+ <% end %>
   <% if @registrations.any?  %>
     <h3>Events Registered For</h3>
     <hr>
