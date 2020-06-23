@@ -40,5 +40,9 @@ class Event < ApplicationRecord
     spots_left.zero?    
   end
   
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+  
   
 end

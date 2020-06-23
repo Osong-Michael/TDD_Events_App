@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new'
   resources :users
   root 'events#index'
+
+  get 'events/filter/past' => 'events#index', filter: 'past'
+
   resources :events do
     resources :registrations
     resources :likes
