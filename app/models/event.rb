@@ -15,13 +15,22 @@ class Event < ApplicationRecord
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
 
+  scope :past, -> { where('starts_at < ?', Time.now).order('starts_at') }
+  scope :upcoming, -> { where('starts_at >= ?', Time.now).order('starts_at') }
+  # Ex:- scope :active, -> {where(:active => true)}
+  # Ex:- scope :active, -> {where(:active => true)}
+
   def free?
     price.blank? || price.zero?    
   end
 
-  def self.upcoming
-    where('starts_at >= ?', Time.now).order('starts_at')
-  end
+  # def self.past
+  #   where('starts_at < ?', Time.now).order('starts_at')
+  # end
+
+  # def self.upcoming
+  #   where('starts_at >= ?', Time.now).order('starts_at')
+  # end
 
   def spots_left
     capacity - registrations.size
