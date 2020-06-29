@@ -1,20 +1,76 @@
-<article>
+<% content_for(:title, @event.name)  %>
+
+<article id="event" class="event">
   <header>
-    <h1><%= @event.name%></h1>
+    <%= image_for(@event) %>
+    <h1><%= @event.name %></h1>
+    <h2><%= @event.starts_at %></h2>
   </header>
+  
   <p>
     <%= @event.description %>
   </p>
-  <h3>Where</h3>
+
+  <p>
+    <%= pluralize(@likers.size, 'like') %>
+  </p>
+
+  <% if current_user %>
+    <% if @current_like %>
+      <%= button_to 'Unliike', event_like_path(@event, @current_like), method: :delete %>
+    <% else %>
+      <%= button_to 'Like', event_likes_path(@event) %>
+    <% end %>
+  <% end %>
+
+
+  <h3>Price</h3>
+  <p>
+    <%= format_price(@event) %>
+  </p>
+  
+  <h3>Location</h3>
   <p>
     <%= @event.location %>
   </p>
-  <h3>When</h3>
+  
+  <h3>Capacity</h3>
   <p>
-    <%= @event.starts_at %>
+    <%= pluralize(@event.capacity, 'spot') %>
   </p>
-  <h3>Price</h3>
-  <p>
-    <%= number_to_currency(@event.price) %>
-  </p>
+
+  <%= link_to 'Who is registered?', event_registrations_path(@event) %>
+  
+  <footer>
+    <%= register_link(@event) %>
+    <nav>
+      <% if current_user_admin? %>
+        <%= link_to 'Edit', edit_event_path(@event), class: 'button' %>
+        <%= link_to 'Delete', @event, 
+                    class: 'button',
+                    method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </nav>
+  </footer>
 </article>
+
+<% content_for(:side) do %>
+  <% if @likers.any? %>
+    <h3>Likers</h3>
+    <ul>
+      <% @likers.each do |user| %>
+        <li>
+          <%= link_to user.name, user %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+  <h3>Categories</h3>
+  <ul>
+    <% @categories.each do |category| %>
+      <li>
+        <%= category.name %>
+      </li>
+      <% end %>
+  </ul>
+<% end %>
