@@ -1,0 +1,18 @@
+<aside id="sidebar">
+  <nav>
+    <ul>  
+      <li class="upcoming-events">
+        <%= link_to "Upcoming Events", events_path, class: 'button' %>
+      </li>
+      <li class="upcoming-events">
+        <%= link_to "Past Events", events_filter_past_path, class: 'button' %>
+      </li>
+      <% if current_user_admin? %>
+      <li class="create-event">
+        <%= link_to 'Add New Event', new_event_path, class: 'button' %>
+      </li>
+      <% end %>
+    </ul>
+  </nav>
+  <%= content_for(:side) %>
+</aside>

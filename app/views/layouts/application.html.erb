@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Events2</title>
+    <title><%= page_title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,21 @@
   </head>
 
   <body>
-    <%= yield %>
+    
+    <%= render 'layouts/header' %>
+    <div id="wrapper">
+
+    <%= render "layouts/flash"  %>
+
+    <div id="container">
+      <%= render "layouts/sidebar" %>
+      <section id="content">
+        <%= yield %>
+      </section>
+    </div>
+
+   </div>
+
+  <%= render 'layouts/footer' %>
   </body>
 </html>
